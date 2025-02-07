@@ -1,0 +1,16 @@
+#crucigrama {
+  display: grid;
+  grid-template-columns: repeat(14, 30px);
+  grid-template-rows: repeat(13, 40px);
+  gap: 2px;
+}
+
+.celda {
+  border: 1px solid #000;
+  background-color: #ccc;
+  text-align: center;
+  font-size: 18px;
+  line-height: 40px;
+  cursor: pointer;
+  user-select: none;
+}
