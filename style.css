@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
 #crucigrama {
   display: grid;
   grid-template-columns: repeat(14, 30px);
@@ -6,11 +8,82 @@
 }
 
 .celda {
-  border: 1px solid #000;
+  width: 30px;
+  height: 40px;
+  border: 0.2px solid #000;
+  border-radius: 3px;
   background-color: #ccc;
+  box-shadow: 2px 2px 5px rgba(207, 146, 38, 1); /* Efecto de sombra */
+  transition: all 0.2s ease-in-out; /* Animaciones suaves */
   text-align: center;
+  font-family: 'Special Elite', cursive;
+  cursive;
+  font-weight: bold;
   font-size: 18px;
   line-height: 40px;
   cursor: pointer;
   user-select: none;
+}
+
+/* Celdas negras (bloqueadas) */
+.celda[contentEditable="false"] {
+ /* Un poco de transparencia */
+  border-radius: 4px;
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.2); /* Efecto de relieve */
+}
+
+/* Efecto al enfocar */
+.celda:focus {
+  outline: none;
+  background-color: rgba(207, 146, 38, 0.9); /* Azul claro */
+  box-shadow: 0px 0px 10px rgba(207, 146, 38, 0.8);
+  transform: scale(1.1); /* Pequeño zoom */
+}
+
+/* Añade interactividad con las celdas */
+.celda:hover {
+  background-color: rgba(207, 146, 38, 1);
+  transform: scale(1.1); /* Pequeño zoom */
+}
+
+/*Para la numeración*/
+
+.celda[data-pista]::before {
+  content: attr(data-pista); /* Muestra el número de la pista */
+  position: absolute;
+  font-family: 'Special Elite', cursive;
+  cursive;
+  font-size: 15px;
+  font-weight: bold;
+  top: -8px;
+  left: 1px;
+  color: #000; /* Color negro */
+  background-color: rgba(255, 255, 255, 0); /* Fondo transparente */
+  padding: 0px;
+  border-radius: 3px;
+}
+.celda {
+  position: relative; /* Necesario para posicionar el número */
+}
+
+/* Formato para las pistas */
+
+#pistas {
+  margin-top: 20px;
+}
+
+#pistas h2 {
+  font-size: 20px;
+  color: #581919;
+  font-family: 'Special Elite', cursive;
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+#pistas ol {
+  padding-left: 20px;
+  font-family: 'Special Elite', cursive;
+  cursive;
+  font-weight: bold;
+  font-size: 18px; /* Un tamaño ligeramente mayor para mejor legibilidad */
+  line-height: 1.3; 
 }

@@ -80,37 +80,63 @@ celdas.forEach((celda, index) => {
   //Si la celda es de valor 0, el fondo se pone de color #000 (negro)
   //  y hace que no se pueda editar
   if (patron[index] === 0) {
-    celda.style.backgroundColor = '#000';
+    celda.style.backgroundColor = '#272727';
     celda.contentEditable = false;
   }
 });
 
-//Validación de respuestas
-/*
-const respuestas = [
-  // Colocar aquí las respuestas correctas en orden de las celdas
-  'P', 'A', 'R', 'I', 'S', // Por ejemplo
-  // Continúa con el resto
+
+
+//*******************************
+//Solución del crucigrama
+//*******************************
+
+
+//Definición de las respuestas
+const respuestasCrucigrama = [
+  { palabra: "ENSALADA", posiciones: [34, 35, 36, 37, 38, 39, 40, 41] }, // Fila específica
+  { palabra: "PLATANO", posiciones: [56, 57, 58, 59, 60, 61, 62] }, 
+  { palabra: "LECHE", posiciones: [57, 71, 85, 99, 113] }, // Columna específica
+  { palabra: "ZANAHORIA", posiciones: [46, 60, 74, 88, 102, 116, 130, 144, 158] }, 
+  { palabra: "QUESO", posiciones: [6, 20, 34, 48, 62] }, 
+  { palabra: "ARROZ", posiciones: [37, 51, 65, 79, 93] }, 
+  { palabra: "NARANJA", posiciones: [25, 39, 53, 67, 81, 95, 109] }
 ];
+
+
+
+//*******************************
+//Numeración palabras
+//*******************************
+
+// Agregar numeración a las primeras celdas de cada palabra sin afectar respuestas
+respuestasCrucigrama.forEach(({ posiciones }, index) => {
+  const primeraCelda = celdas[posiciones[0]]; // Obtiene la primera celda de la palabra
+  primeraCelda.setAttribute("data-pista", index + 1); // Agrega el número como atributo
+});
+
+
+
+//*******************************
+//Validación de respuestas
+//*******************************
+
 
 function verificarRespuestas() {
   let correcto = true;
-  
-  celdas.forEach((celda, index) => {
-    if (patron[index] === 1) {
-      const letraUsuario = celda.textContent.trim().toUpperCase();
-      if (letraUsuario !== respuestas[index]) {
-        celda.style.backgroundColor = '#f8d7da'; // Rojo claro
-        correcto = false;
-      } else {
-        celda.style.backgroundColor = '#d4edda'; // Verde claro
-      }
+
+  respuestasCrucigrama.forEach(({ palabra, posiciones }) => {
+    let palabraUsuario = posiciones.map(index => celdas[index].textContent.trim().toUpperCase()).join('');
+    
+    if (palabraUsuario !== palabra) {
+      posiciones.forEach(index => celdas[index].style.backgroundColor = '#dd6767'); // Marcar en rojo
+      correcto = false;
+    } else {
+      posiciones.forEach(index => celdas[index].style.backgroundColor = '#8fda8f'); // Verde si es correcta
     }
   });
-  
+
   if (correcto) {
     alert('¡Felicidades! Has resuelto el crucigrama.');
   }
 }
-*/
-// Puedes añadir un botón para activar la verificación
